@@ -19,6 +19,8 @@ return new class extends Migration
             $table->string('type');
             $table->string('discription');
             $table->string('status');
+            $table->integer('stock');
+            $table->string('test');
             $table->timestamps();
         });
     }
