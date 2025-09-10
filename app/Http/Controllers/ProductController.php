@@ -2,62 +2,78 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Product;
+use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 
 class ProductController extends Controller
 {
+    public function index(): View
+    {
+        return view('products.index', [
+            'products' => Product::all()
+        ]);
+    }
 
-    // Call for creationd form
-    public function create(): View {
+    public function create(): View
+    {
         return view('products.create');
     }
 
-    // Call for submitting/saving filled form data
     public function store(Request $request): RedirectResponse
     {
-
-        $product = new Product();
-        $product->name = $request->input('name');
-        $product->code = $request->input('code');
-        $product->unit_price = $request->input('unit_price');
-        $product->stock = $request->input('stock');
-        $product->type = $request->input('type');
-        $product->discription = $request->input('discription');
-        $product->save();
-
-        return redirect('products');
-    }
-
-    // Call for existing record form
-    public function edit(): View {
-        return view('products.edit');
-    }
-
-    // Call for submitting/saving edited recod form data
-    public function update(): View {
-    }
-
-
-    /**
-     * Show the profile for a given product.
-     */
-    public function show(string $id): View
-    {
-        return view('products.show', [
-            'product' => Product::findOrFail($id)
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'code' => 'required|string|max:20|unique:products,code',
+            'unit_price' => 'required|numeric',
+            'stock' => 'required|integer',
+            'type' => 'required|string|max:50',
+            'discription' => 'nullable|string',
         ]);
+
+        Product::create($request->only([
+            'name', 'code', 'unit_price', 'stock', 'type', 'discription'
+        ]));
+
+        return redirect()->route('products.index')
+            ->with('success', 'Product created successfully.');
     }
 
-
-    /**
-     * Show the profile for a given product.
-     */
-    public function index(): View
+    public function show(Product $product): View
     {
-        return view('products', [
-            'products' => ["name" => "Kobbs"] // Product::all()
+        return view('products.show', ['product' => $product]);
+    }
+
+    public function edit(Product $product): View
+    {
+        return view('products.edit', ['product' => $product]);
+    }
+
+    public function update(Request $request, Product $product): RedirectResponse
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'code' => 'required|string|max:20|unique:products,code,' . $product->id,
+            'unit_price' => 'required|numeric',
+            'stock' => 'required|integer',
+            'type' => 'required|string|max:50',
+            'discription' => 'nullable|string',
         ]);
+
+        $product->update($request->only([
+            'name', 'code', 'unit_price', 'stock', 'type', 'discription'
+        ]));
+
+        return redirect()->route('products.index')
+            ->with('success', 'Product updated successfully.');
+    }
+
+    public function destroy(Product $product): RedirectResponse
+    {
+        $product->delete();
+
+        return redirect()->route('products.index')
+            ->with('success', 'Product deleted successfully.');
     }
 }

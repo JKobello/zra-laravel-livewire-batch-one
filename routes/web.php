@@ -19,13 +19,15 @@ Route::middleware(['auth'])->group(function () {
     Volt::route('settings/password', 'settings.password')->name('settings.password');
     Volt::route('settings/appearance', 'settings.appearance')->name('settings.appearance');
 
+    Route::resource('products', ProductController::class);
 });
 
-Route::get('/products', [ProductController::class, 'index']);
-Route::get('/products/{id}', [ProductController::class, 'show']);
-Route::get('/products/{id}/edit', [ProductController::class, 'edit']);
-Route::post('/products/{id}/update', [ProductController::class, 'update']);
-Route::get('/products/create', [ProductController::class, 'create']);
-Route::post('/products/store', [ProductController::class, 'store']);
+
+// Route::get('/products', [ProductController::class, 'products.index']);
+// Route::get('/products/{id}', [ProductController::class, 'products.show']);
+// Route::get('/products/{id}/edit', [ProductController::class, 'products.edit']);
+// Route::post('/products/{id}/update', [ProductController::class, 'products.update']);
+// Route::get('/products/create', [ProductController::class, 'products.create']);
+// Route::post('/products/store', [ProductController::class, 'products.store']);
 
 require __DIR__.'/auth.php';
