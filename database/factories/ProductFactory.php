@@ -17,20 +17,19 @@ class ProductFactory extends Factory
      */
     public function definition(): array
     {
-        $faker = fake();
-        $methods = get_class_methods($faker);
-        dd($methods);
+        // $faker = fake();
+        // $methods = get_class_methods($faker);
+        // dd($methods);
 
         return [
             'name' => fake()->name(),
             'code' => Str::random(6),
             'unit_price' => fake()->randomFloat(),
-            'quantity' => fake()->randomNumber(),
+            'type' => Str::random(5),
+            'description' => fake()->text(),
             // 2 decimals, min 5, max 500
             'unit_price' => fake()->randomFloat(2, 5, 500),
-            'quantity' => fake()->numberBetween(1, 100),
-            'type' => Str::random(5),
-            'description' => fake()->text()
+            'stock' => fake()->numberBetween(1, 100),
         ];
     }
 }
