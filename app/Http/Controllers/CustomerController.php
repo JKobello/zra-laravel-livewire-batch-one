@@ -3,16 +3,21 @@
 namespace App\Http\Controllers;
 
 use App\Models\Customer;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class CustomerController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(): View
     {
         //
+        return view('customers.index', [
+            'customers'=>Customer::all()
+        ]);
     }
 
     /**
@@ -21,14 +26,31 @@ class CustomerController extends Controller
     public function create()
     {
         //
+        return view('customers.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
         //
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'company_name' => 'required|string|max:255',
+            'email' => 'required|string',
+            'phone_number'=>'required|max:255',
+            'account_balance => requuired|float',
+            'country'=>'required|string',
+        ]);
+
+        Customer::create($request->only([
+            'name', 'company_name', 'email', 'phone_number', 'account_balance', 'country'
+        ]));
+
+        return redirect()->route('customers.index')
+            ->with('success', 'Customer created successfully.');
+
     }
 
     /**
@@ -36,7 +58,7 @@ class CustomerController extends Controller
      */
     public function show(Customer $customer)
     {
-        //
+        return view('customers.show', ['customer' => $customer]);
     }
 
     /**
@@ -44,22 +66,39 @@ class CustomerController extends Controller
      */
     public function edit(Customer $customer)
     {
-        //
+        return view('customers.edit', ['customer' => $customer]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Customer $customer)
+    public function update(Request $request, Customer $customer): RedirectResponse
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'company_name' => 'required|string|max:255',
+            'email' => 'required|string',
+            'phone_number'=>'required|max:255',
+            'account_balance => requuired|float',
+            'country'=>'required|string',
+        ]);
+
+        $customer->update($request->only([
+            'name', 'company_name', 'email', 'phone_number', 'account_balance', 'country'
+        ]));
+
+        return redirect()->route('customers.index')
+            ->with('success', 'Customer updated successfully.');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Customer $customer)
+    public function destroy(Customer $customer): RedirectResponse
     {
-        //
+        $customer->delete();
+        return redirect()->route('customers.index')
+            ->with('success', 'Customer deleted successfully.');
+
     }
 }

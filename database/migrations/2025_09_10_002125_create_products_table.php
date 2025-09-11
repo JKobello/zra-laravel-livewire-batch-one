@@ -11,8 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        // $methods = get_class_methods(Blueprint::class);
-        // dd($methods);
+        $methods = get_class_methods(Blueprint::class);
+        dd($methods);
 
         Schema::create('products', function (Blueprint $table) {
             $table->id();
