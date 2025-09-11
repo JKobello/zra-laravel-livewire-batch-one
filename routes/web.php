@@ -2,9 +2,12 @@
 
 use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
-use App\Http\Controllers\ProductController;
+// use App\Http\Controllers\ProductController;
+use App\Livewire\Products\Index as ProductIndex;
+use App\Livewire\Products\Show as ProductShow;
+// use App\Livewire\Warehouses\Index as WarehouseIndex;
 
-Route::get('/home', function () {
+Route::get('/', function () {
     return view('welcome');
 })->name('home');
 
@@ -19,7 +22,8 @@ Route::middleware(['auth'])->group(function () {
     Volt::route('settings/password', 'settings.password')->name('settings.password');
     Volt::route('settings/appearance', 'settings.appearance')->name('settings.appearance');
 
-    Route::resource('products', ProductController::class);
+    Route::get('/products/index', ProductIndex::class)->name('products.index');
+    Route::get('/products/{id}/show', ProductShow::class)->name('products.show');
 });
 
 
