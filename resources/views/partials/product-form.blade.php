@@ -29,9 +29,9 @@
 </div>
 
 <div class="mb-3">
-    <label for="discription" class="form-label">Description</label>
-    <textarea name="discription" class="form-control">{{ old('discription', $product->discription ?? '') }}</textarea>
-    @error('discription') <small class="text-danger">{{ $message }}</small> @enderror
+    <label for="description" class="form-label">Description</label>
+    <textarea name="description" class="form-control">{{ old('description', $product->description ?? '') }}</textarea>
+    @error('description') <small class="text-danger">{{ $message }}</small> @enderror
 </div>
 
 <button type="submit" class="btn btn-primary">{{ $buttonText }}</button>

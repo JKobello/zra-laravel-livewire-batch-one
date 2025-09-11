@@ -5,8 +5,8 @@
         <li class="list-group-item"><strong>Price:</strong> {{ $product->unit_price }}</li>
         <li class="list-group-item"><strong>Stock:</strong> {{ $product->stock }}</li>
         <li class="list-group-item"><strong>Type:</strong> {{ $product->type }}</li>
-        <li class="list-group-item"><strong>Description:</strong> {{ $product->discription }}</li>
+        <li class="list-group-item"><strong>Description:</strong> {{ $product->description }}</li>
     </ul>
 
-    <a href="{{ route('products.index') }}" class="btn btn-primary mt-3">Back</a>
+    <a style="background-color:grey;color:white" href="{{ route('products.index') }}" class="btn btn-primary mt-3">Back</a>
 </x-layouts.app>

@@ -23,21 +23,25 @@ class ProductController extends Controller
 
     public function store(Request $request): RedirectResponse
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'code' => 'required|string|max:20|unique:products,code',
-            'unit_price' => 'required|numeric',
-            'stock' => 'required|integer',
-            'type' => 'required|string|max:50',
-            'discription' => 'nullable|string',
-        ]);
+        try {
+            $request->validate([
+                'name' => 'required|string|max:255',
+                'code' => 'required|string|max:20|unique:products,code',
+                'unit_price' => 'required|numeric',
+                'stock' => 'required|integer',
+                'type' => 'required|string|max:50',
+                'description' => 'nullable|string',
+            ]);
 
-        Product::create($request->only([
-            'name', 'code', 'unit_price', 'stock', 'type', 'discription'
-        ]));
+            Product::create($request->only([
+                'name', 'code', 'unit_price', 'stock', 'type', 'description'
+            ]));
 
-        return redirect()->route('products.index')
-            ->with('success', 'Product created successfully.');
+            return redirect()->route('products.index')
+                ->with('success', 'Product created successfully.');
+        } catch(\Exception $e) {
+            return redirect()->back()->with("error", "Validation failed. ".$e->getMessage());
+        }
     }
 
     public function show(Product $product): View
@@ -52,21 +56,26 @@ class ProductController extends Controller
 
     public function update(Request $request, Product $product): RedirectResponse
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'code' => 'required|string|max:20|unique:products,code,' . $product->id,
-            'unit_price' => 'required|numeric',
-            'stock' => 'required|integer',
-            'type' => 'required|string|max:50',
-            'discription' => 'nullable|string',
-        ]);
+        try {
+            $request->validate([
+                'name' => 'required|string|max:255',
+                'code' => 'required|string|max:20|unique:products,code,' . $product->id,
+                'unit_price' => 'required|numeric',
+                'stock' => 'required|integer',
+                'type' => 'required|string|max:50',
+                'description' => 'required|string',
+            ]);
 
-        $product->update($request->only([
-            'name', 'code', 'unit_price', 'stock', 'type', 'discription'
-        ]));
+            $product->update($request->only([
+                'name', 'code', 'unit_price', 'stock', 'type', 'description'
+            ]));
 
-        return redirect()->route('products.index')
-            ->with('success', 'Product updated successfully.');
+            return redirect()->route('products.index')
+                ->with('success', 'Product updated successfully.');
+        } catch(\Exception $e) {
+            return redirect()->back()->with("error", "Validation failed. ".$e->getMessage());
+        }
+
     }
 
     public function destroy(Product $product): RedirectResponse

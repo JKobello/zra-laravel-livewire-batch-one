@@ -9,10 +9,10 @@
         <div class="alert alert-danger">{{ session('error') }}</div>
     @endif
 
-    <a href="{{ route('products.create') }}" class="btn btn-primary mb-3">Add Product</a>
+    <a style="background-color:blue;color:white" href="{{ route('products.create') }}" class="btn btn-primary mb-3">Add Product</a>
 
     <table class="table table-bordered">
-        <thead>
+        <thead style="background-color:red; color:white">
             <tr>
                 <th>Name</th>
                 <th>Code</th>
@@ -31,7 +31,7 @@
                     <td>{{ $product->stock }}</td>
                     <td>{{ $product->type }}</td>
                     <td>
-                        <a href="{{ route('products.show', $product) }}" class="btn btn-info btn-sm">View</a>
+                        <a style="background-color:blue;color:white" href="{{ route('products.show', $product->id) }}" class="btn btn-info btn-sm ">View</a>
                         <a href="{{ route('products.edit', $product) }}" class="btn btn-warning btn-sm">Edit</a>
                         <form action="{{ route('products.destroy', $product) }}" method="POST" class="d-inline">
                             @csrf
