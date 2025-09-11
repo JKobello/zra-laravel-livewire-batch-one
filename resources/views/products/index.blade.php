@@ -1,13 +1,13 @@
 <x-layouts.app :title="'Products'">
 
     <h1>Products</h1>
-<!--
+
     @if(session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
     @if(session('error'))
         <div class="alert alert-danger">{{ session('error') }}</div>
-    @endif -->
+    @endif
 
     <a href="{{ route('products.create') }}" class="btn btn-primary mb-3">Add Product</a>
 
