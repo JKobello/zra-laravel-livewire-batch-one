@@ -5,7 +5,7 @@
         @csrf
         @method('PUT')
 
-        @include('partials.customers.form', ['buttonText' => 'Update Customer'])
+        @include('partials.customer_form', ['buttonText' => 'Update Customer'])
 
     </form>
 </x-layouts.app>
