@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\PurchaseController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -20,6 +21,7 @@ Route::middleware(['auth'])->group(function () {
     Volt::route('settings/appearance', 'settings.appearance')->name('settings.appearance');
 
     Route::resource('products', ProductController::class);
+    Route::resource('purchases', PurchaseController::class);
 });
 
 
@@ -31,3 +33,4 @@ Route::middleware(['auth'])->group(function () {
 // Route::post('/products/store', [ProductController::class, 'products.store']);
 
 require __DIR__.'/auth.php';
+
