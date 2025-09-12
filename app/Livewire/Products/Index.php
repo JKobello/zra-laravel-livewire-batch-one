@@ -19,7 +19,7 @@ class Index extends Component
     public function destroy(Product $product)
     {
         $product->delete();
-        $this->products = Product::all();
+        // $this->products = Product::all();
     }
 
     public function render()
@@ -31,6 +31,7 @@ class Index extends Component
     {
         // $this->products = [];
         // dd($this->products);
+        $this->products = Product::all();
 
     }
 }

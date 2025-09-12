@@ -7,14 +7,11 @@ use Livewire\Component;
 
 class Show extends Component
 {
-    public $id;
     public $product;
 
-
-    public function mount() {
-        // var_dump($this->id, $this->product);
-        $this->product = Product::findOrFail($this->id);
-        // dd($this->product);
+    public function mount(Product $product)
+    {
+        $this->product = $product;
     }
 
     public function render()
