@@ -14,7 +14,7 @@ class ProductSeeder extends Seeder
     public function run(): void
     {
         // Generate 10 records of Products (with status as true) and save then in to DB
-        Product::factory()->count(10)->create([
+        Product::factory()->count(7)->create([
             'status' => true,
         ]);
 

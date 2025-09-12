@@ -22,7 +22,8 @@
                 <th>Price</th>
                 <th>Stock</th>
                 <th>Type</th>
-                <th>photo</th>
+                <th>Manufactured Date</th>
+                <th>Product Image</th>
                 <th>Actions</th>
             </tr>
         </thead>

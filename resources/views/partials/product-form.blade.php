@@ -29,9 +29,9 @@
 </div>
 
 <div class="mb-3">
-    <label for="cn" class="form-label">Control number</label>
-    <input type="text" wire:model="cn" class="form-control">
-    @error('type') <small class="text-danger">{{ $message }}</small> @enderror
+    <label for="mf_date" class="form-label">Manufactured Date</label>
+    <input type="date" wire:model="mf_date" class="form-control">
+    @error('mf_date') <small class="text-danger">{{ $message }}</small> @enderror
 </div>
 
 <div class="mb-3">
@@ -40,10 +40,26 @@
     @error('description') <small class="text-danger">{{ $message }}</small> @enderror
 </div>
 
+<!-- Photo Preview -->
 <div class="mb-3">
-    <label for="photo" class="form-label">Description</label>
-    <input type="file" wire:model="photo">
-    @error('photo') <span class="error">{{ $message }}</span> @enderror
+    <label for="photo" class="form-label">Product Image</label>
+
+    {{-- Show existing photo for edit --}}
+    @if(!$newPhoto && $product?->photo)
+        <div class="mb-2">
+            <img src="{{ asset('storage/' . $product->photo) }}" width="120" class="img-thumbnail">
+        </div>
+    @endif
+
+    {{-- Preview newly uploaded photo --}}
+    @if($newPhoto)
+        <div class="mb-2">
+            <img src="{{ $newPhoto->temporaryUrl() }}" width="120" class="img-thumbnail">
+        </div>
+    @endif
+
+    <input type="file" wire:model="newPhoto">
+    @error('newPhoto') <span class="text-danger">{{ $message }}</span> @enderror
 </div>
 
 <button style="background-color:blue;color:white" type="submit" class="btn btn-primary">{{ $buttonText }}</button>

@@ -7,12 +7,12 @@ use Livewire\Component;
 
 class Show extends Component
 {
-    public $product;
+    public Product $product;
 
-    public function mount(Product $product)
-    {
-        $this->product = $product;
-    }
+    // public function mount(Product $product)
+    // {
+    //     $this->product = $product;
+    // }
 
     public function render()
     {

@@ -4,55 +4,70 @@ namespace App\Livewire\Products;
 
 use Livewire\Component;
 use Livewire\WithFileUploads;
+use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
 use App\Models\Product;
+use App\Utils\FileHelper;
 
 class Edit extends Component
 {
     use WithFileUploads;
 
-    public $product;
+    public Product $product;
     public $name;
     public $code;
     public $unit_price;
     public $stock;
     public $type;
     public $description;
-    public $photo;
+    public $mf_date;
+    public $newPhoto;
 
-    public function mount(Product $product)
-    {
-        $this->product = $product;
-        $this->name = $product->name;
-        $this->code = $product->code;
-        $this->unit_price = $product->unit_price;
-        $this->stock = $product->stock;
-        $this->type = $product->type;
-        $this->description = $product->description;
-        $this->photo = $product->photo;
-    }
+    private const UPLOAD_PATH = 'attachments/products/img';
 
-    public function save()
+    public function mount()
     {
-        $this->photo->store(path: 'attachments/photos');
+        // $this->product = $product;
+        $this->name = $this->product->name;
+        $this->code = $this->product->code;
+        $this->unit_price = $this->product->unit_price;
+        $this->stock = $this->product->stock;
+        $this->type = $this->product->type;
+        $this->description = $this->product->description;
+        $this->mf_date = $this->product->mf_date;
+        // $this->photo = $this->product->photo;
     }
 
     public function update()
     {
-            $validatedProduct = $this->validate([
-                'name' => 'required|string|max:255',
-                'code' => 'required|string|max:20|unique:products,code,' . $this->product->id,
-                'unit_price' => 'required|numeric',
-                'stock' => 'required|integer',
-                'type' => 'required|string|max:50',
-                'description' => 'required|string',
-                'photo' => 'image|max:1024',
-            ]);
+        $validatedProduct = $this->validate([
+            'name' => 'required|string|max:255',
+            'code' => 'required|string|max:20|unique:products,code,' . $this->product->id,
+            'unit_price' => 'required|numeric',
+            'stock' => 'required|integer',
+            'type' => 'required|string|max:50',
+            'description' => 'required|string',
+            'mf_date' => 'required|date|before_or_equal:today',
+            'newPhoto' => 'nullable|image|max:1024',
+        ]);
 
-            $this->product->update($validatedProduct);
+        if ($this->newPhoto instanceof TemporaryUploadedFile) {
+            $path = storage_path('app/public/' . self::UPLOAD_PATH);
+            FileHelper::createFolderIfNotExists($path);
 
-            session()->flash('success', 'Product updated successfully.');
+            // store inside storage/app/public/attachments/products/img
+            $validatedProduct['photo'] = $this->newPhoto->store(self::UPLOAD_PATH, 'public');
 
-            return redirect()->route('products.index');
+            // Delete the previous file to avoid unused files accumulating:
+            if ($this->product->photo && $this->newPhoto instanceof TemporaryUploadedFile) {
+                \Storage::disk('public')->delete($this->product->photo);
+            }
+        }
+
+        $this->product->update($validatedProduct);
+
+        session()->flash('success', 'Product updated successfully.');
+
+        return redirect()->route('products.index');
     }
 
     public function render()

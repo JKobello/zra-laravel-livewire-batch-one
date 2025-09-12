@@ -17,12 +17,14 @@ return new class extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('code');
-            $table->float('unit_price');
+            $table->string('code')->unique();
+            $table->decimal('unit_price', 10, 2);
             $table->string('type');
-            $table->string('description');
+            $table->date('mf_date');
+            $table->text('description')->nullable();
             $table->boolean('status')->default(true);
             $table->integer('stock');
+            $table->string('photo')->nullable();
             $table->timestamps();
         });
     }

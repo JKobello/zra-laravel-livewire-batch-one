@@ -8,17 +8,23 @@ use App\Models\Product;
 
 class Index extends Component
 {
-    #[On('destroy-product')]
+    public $products;
+
+    public function mount()
+    {
+        $this->products = Product::all();
+    }
+
     public function destroy(Product $product)
     {
         $product->delete();
+        session()->flash('success', 'Product deleted successfully.');
+        $this->redirect('index', true);
     }
 
     public function render()
     {
-        return view('livewire.products.index', [
-            'products' => Product::all()
-        ]);
+        return view('livewire.products.index');
     }
 }
 
