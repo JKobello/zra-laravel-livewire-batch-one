@@ -23,6 +23,8 @@ class Product extends Model
         'stock',
         'type',
         'description',
+        'photo',
+        'cn'
     ];
 
     /**

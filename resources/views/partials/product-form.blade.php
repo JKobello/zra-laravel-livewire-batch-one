@@ -29,9 +29,21 @@
 </div>
 
 <div class="mb-3">
+    <label for="cn" class="form-label">Control number</label>
+    <input type="text" wire:model="cn" class="form-control">
+    @error('type') <small class="text-danger">{{ $message }}</small> @enderror
+</div>
+
+<div class="mb-3">
     <label for="description" class="form-label">Description</label>
     <textarea wire:model="description" class="form-control"></textarea>
     @error('description') <small class="text-danger">{{ $message }}</small> @enderror
+</div>
+
+<div class="mb-3">
+    <label for="photo" class="form-label">Description</label>
+    <input type="file" wire:model="photo">
+    @error('photo') <span class="error">{{ $message }}</span> @enderror
 </div>
 
 <button style="background-color:blue;color:white" type="submit" class="btn btn-primary">{{ $buttonText }}</button>

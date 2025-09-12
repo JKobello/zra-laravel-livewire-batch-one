@@ -3,10 +3,13 @@
 namespace App\Livewire\Products;
 
 use Livewire\Component;
+use Livewire\WithFileUploads;
 use App\Models\Product;
 
 class Edit extends Component
 {
+    use WithFileUploads;
+
     public $product;
     public $name;
     public $code;
@@ -14,6 +17,7 @@ class Edit extends Component
     public $stock;
     public $type;
     public $description;
+    public $photo;
 
     public function mount(Product $product)
     {
@@ -24,6 +28,12 @@ class Edit extends Component
         $this->stock = $product->stock;
         $this->type = $product->type;
         $this->description = $product->description;
+        $this->photo = $product->photo;
+    }
+
+    public function save()
+    {
+        $this->photo->store(path: 'attachments/photos');
     }
 
     public function update()
@@ -35,6 +45,7 @@ class Edit extends Component
                 'stock' => 'required|integer',
                 'type' => 'required|string|max:50',
                 'description' => 'required|string',
+                'photo' => 'image|max:1024',
             ]);
 
             $this->product->update($validatedProduct);
