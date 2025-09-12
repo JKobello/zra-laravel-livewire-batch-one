@@ -5,35 +5,34 @@ use Livewire\Volt\Volt;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SaleController;
 
-Route::get('/home', function () {
-    return view('welcome');
+// Redirect root URL to sales index
+Route::get('/', function () {
+    return redirect()->route('sales.index');
 })->name('home');
 
+// Optional welcome page
+Route::get('/home', function () {
+    return view('welcome');
+});
+
+// Dashboard view for authenticated users
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
 
+// Authenticated routes group
 Route::middleware(['auth'])->group(function () {
     Route::redirect('settings', 'settings/profile');
 
+    // Volt settings routes
     Volt::route('settings/profile', 'settings.profile')->name('settings.profile');
     Volt::route('settings/password', 'settings.password')->name('settings.password');
     Volt::route('settings/appearance', 'settings.appearance')->name('settings.appearance');
 
+    // Resource routes
     Route::resource('products', ProductController::class);
     Route::resource('sales', SaleController::class);
 });
 
-
-// Route::get('/products', [ProductController::class, 'index'])->name('products.index');
-// Route::get('/products/{id}', [ProductController::class, 'show'])->name('products.show');
-// Route::get('/products/{id}/edit', [ProductController::class, 'edit'])->name('products.edit');
-// Route::post('/products/{id}/update', [ProductController::class, 'update'])->name('products.update');
-// Route::get('/products/create', [ProductController::class, 'create'])->name('products.create');
-// Route::post('/products/store', [ProductController::class, 'store'])->name('products.store');
-// Route::post('/products/destroy', [ProductController::class, 'destroy'])->name('products.destroy');
-
+// Auth scaffolding
 require __DIR__.'/auth.php';
-
-
-
