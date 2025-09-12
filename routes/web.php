@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\SaleController;
 
 Route::get('/home', function () {
     return view('welcome');
@@ -20,6 +21,7 @@ Route::middleware(['auth'])->group(function () {
     Volt::route('settings/appearance', 'settings.appearance')->name('settings.appearance');
 
     Route::resource('products', ProductController::class);
+    Route::resource('sales', SaleController::class);
 });
 
 
