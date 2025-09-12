@@ -4,7 +4,7 @@
     <form action="{{ route('products.store') }}" method="POST">
         @csrf
 
-        @include('partials.form', ['buttonText' => 'Save Product'])
+        @include('partials.product-form', ['buttonText' => 'Save Product'])
 
     </form>
 

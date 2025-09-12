@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
 use App\Http\Controllers\ProductController;
 
-Route::get('/', function () {
+Route::get('/home', function () {
     return view('welcome');
 })->name('home');
 
@@ -25,11 +25,15 @@ Route::middleware(['auth'])->group(function () {
 });
 
 
-// Route::get('/products', [ProductController::class, 'products.index']);
-// Route::get('/products/{id}', [ProductController::class, 'products.show']);
-// Route::get('/products/{id}/edit', [ProductController::class, 'products.edit']);
-// Route::post('/products/{id}/update', [ProductController::class, 'products.update']);
-// Route::get('/products/create', [ProductController::class, 'products.create']);
-// Route::post('/products/store', [ProductController::class, 'products.store']);
+// Route::get('/products', [ProductController::class, 'index'])->name('products.index');
+// Route::get('/products/{id}', [ProductController::class, 'show'])->name('products.show');
+// Route::get('/products/{id}/edit', [ProductController::class, 'edit'])->name('products.edit');
+// Route::post('/products/{id}/update', [ProductController::class, 'update'])->name('products.update');
+// Route::get('/products/create', [ProductController::class, 'create'])->name('products.create');
+// Route::post('/products/store', [ProductController::class, 'store'])->name('products.store');
+// Route::post('/products/destroy', [ProductController::class, 'destroy'])->name('products.destroy');
 
 require __DIR__.'/auth.php';
+
+
+
