@@ -18,10 +18,10 @@ class Create extends Component
     public $phone_number;
     public $account_balance;
     public $country;
-    public $mf_date;
+    // public $mf_date;
     // public $newPhoto;
 
-    private const UPLOAD_PATH = 'attachments/products/img';
+    // private const UPLOAD_PATH = 'attachments/products/img';
 
     public function store()
     {

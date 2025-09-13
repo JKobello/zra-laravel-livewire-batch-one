@@ -37,4 +37,4 @@
 
 
 <button type="submit" class="btn btn-primary">{{ $buttonText }}</button>
-<a href="{{ route('products.index') }}" class="btn btn-secondary">Cancel</a>
+<a href="{{ route('customers.index') }}" class="btn btn-secondary">Cancel</a>

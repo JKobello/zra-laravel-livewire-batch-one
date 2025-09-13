@@ -20,8 +20,8 @@ class Edit extends Component
     public $phone_number;
     public $account_balance;
     public $country;
-    public $mf_date;
-    public $newPhoto;
+    // public $mf_date;
+    // public $newPhoto;
 
     // private const UPLOAD_PATH = 'attachments/products/img';
 
@@ -34,7 +34,7 @@ class Edit extends Component
         $this->phone_number = $this->customer->phone_number;
         $this->account_balance = $this->customer->account_balance;
         $this->country = $this->customer->country;
-        $this->mf_date = $this->customer->mf_date;
+        // $this->mf_date = $this->customer->mf_date;
         // $this->photo = $this->product->photo;
     }
 
