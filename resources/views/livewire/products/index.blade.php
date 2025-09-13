@@ -33,6 +33,7 @@
             @empty
                 <tr><td colspan="6" class="text-center">No products found.</td></tr>
             @endforelse
+            {{ $products->links() }}
         </tbody>
     </table>
 </div>
