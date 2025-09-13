@@ -19,7 +19,7 @@ class Index extends Component
     {
         $product->delete();
         session()->flash('success', 'Product deleted successfully.');
-        $this->redirect('index', true);
+        $this->redirectRoute('products.index', true);
     }
 
     public function render()

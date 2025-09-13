@@ -23,6 +23,7 @@ class Edit extends Component
     public $newPhoto;
 
     private const UPLOAD_PATH = 'attachments/products/img';
+    private const SUCCESS = 'Product updated successfully.';
 
     public function mount()
     {
@@ -65,7 +66,7 @@ class Edit extends Component
 
         $this->product->update($validatedProduct);
 
-        session()->flash('success', 'Product updated successfully.');
+        session()->flash('success', self::SUCCESS);
 
         return redirect()->route('products.index');
     }
