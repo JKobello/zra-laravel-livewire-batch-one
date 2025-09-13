@@ -7,6 +7,7 @@ use App\Livewire\Products\Index as ProductIndex;
 use App\Livewire\Products\Show as ProductShow;
 
 use App\Livewire\Customers\Index as CustomerIndex;
+use App\Livewire\Customers\Show as CustomerShow;
 // use App\Livewire\Warehouses\Index as WarehouseIndex;
 
 Route::get('/', function () {
@@ -28,6 +29,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/products/{id}/show', ProductShow::class)->name('products.show');
 
     Route::get('customers/index', CustomerIndex::class)->name('customers.index');
+    Route::get('/customers/{id}/show', CustomerShow::class)->name('customers.show');
+
 });
 
 
