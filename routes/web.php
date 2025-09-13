@@ -3,12 +3,10 @@
 use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
 use App\Http\Controllers\CategoryController;
-// use App\Http\Controllers\ProductController;
 use App\Livewire\Products\Index as ProductIndex;
 use App\Livewire\Products\Show as ProductShow;
 use App\Livewire\Products\Create as ProductCreate;
 use App\Livewire\Products\Edit as ProductEdit;
-// use App\Livewire\Warehouses\Index as WarehouseIndex;
 
 Route::get('/', function () {
     return view('welcome');
@@ -31,15 +29,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/products/{product}/show', ProductShow::class)->name('products.show');
 });
 Route::resource('categories', CategoryController::class);
-
-
-// Route::get('/products', [ProductController::class, 'index'])->name('products.index');
-// Route::get('/products/{id}', [ProductController::class, 'show'])->name('products.show');
-// Route::get('/products/{id}/edit', [ProductController::class, 'edit'])->name('products.edit');
-// Route::post('/products/{id}/update', [ProductController::class, 'update'])->name('products.update');
-// Route::get('/products/create', [ProductController::class, 'create'])->name('products.create');
-// Route::post('/products/store', [ProductController::class, 'store'])->name('products.store');
-// Route::post('/products/destroy', [ProductController::class, 'destroy'])->name('products.destroy');
 
 require __DIR__.'/auth.php';
 

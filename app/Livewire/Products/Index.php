@@ -10,6 +10,16 @@ use App\Models\Product;
 
 class Index extends Component
 {
+    public $products;
+
+    public function mount($products = []) {
+        if ($products) {
+            $this->products = $products;
+        } else {
+            $this->products = Product::all();
+        }
+    }
+
     use WithPagination, WithoutUrlPagination;
 
     public function destroy(Product $product)
@@ -21,9 +31,7 @@ class Index extends Component
 
     public function render()
     {
-        return view('livewire.products.index', [
-            'products' => Product::paginate(20)
-        ]);
+        return view('livewire.products.index');
     }
 }
 

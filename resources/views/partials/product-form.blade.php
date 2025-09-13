@@ -23,8 +23,8 @@
 </div>
 
 <div class="mb-3">
-    <label for="type" class="form-label">Type</label>
-    <input type="text" wire:model="type" class="form-control">
+    <label for="category_id" class="form-label">Product Category</label>
+    <input type="number" wire:model="category_id" class="form-control">
     @error('type') <small class="text-danger">{{ $message }}</small> @enderror
 </div>
 

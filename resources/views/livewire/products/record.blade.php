@@ -4,7 +4,7 @@
     <td>{{ $product->code }}</td>
     <td>{{ $product->unit_price }}</td>
     <td>{{ $product->stock }}</td>
-    <td>{{ $product->type }}</td>
+    <td>{{ $product->category_id }}</td>
     <td>{{ $product->mf_date }}</td>
     <td>
         @if($product->photo)

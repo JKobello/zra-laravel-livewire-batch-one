@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('code')->unique();
             $table->decimal('unit_price', 10, 2);
-            $table->string('type');
+            $table->bigInteger('category_id'); /// Foreign Key from Category Table - Must match data type
             $table->date('mf_date');
             $table->text('description')->nullable();
             $table->boolean('status')->default(true);

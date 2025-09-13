@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Product extends Model
 {
@@ -21,7 +22,7 @@ class Product extends Model
         'code',
         'unit_price',
         'stock',
-        'type',
+        'category_id', // Category ID
         'description',
         'mf_date',
         'photo',
@@ -50,5 +51,9 @@ class Product extends Model
     //  */
     // public $incrementing = false;
 
+    public function category(): BelongsTo
+    {
+        return $this->belongsTo(Category::class, 'type');
+    }
 
 }

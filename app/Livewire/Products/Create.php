@@ -25,8 +25,8 @@ class Create extends Component
     #[Validate('required|integer')]
     public $stock;
 
-    #[Validate('required|string|max:50')]
-    public $type;
+    #[Validate('required|integer|max:50', as: "Product Category")]
+    public $category_id;
 
     #[Validate('nullable|string')]
     public $description;

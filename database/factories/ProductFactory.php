@@ -27,7 +27,7 @@ class ProductFactory extends Factory
         return [
             'name'        => fake()->word(),
             'code'        => strtoupper(Str::random(6)),
-            'type'        => fake()->randomElement(['Electronics', 'Furniture', 'Food', 'Clothing']),
+            'category_id'        => fake()->randomNumber(),
             'description' => fake()->sentence(10),
             // 2 decimals, min 5, max 500
             'unit_price'  => fake()->randomFloat(2, 5, 500),

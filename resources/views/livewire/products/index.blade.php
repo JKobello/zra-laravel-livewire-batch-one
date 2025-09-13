@@ -21,7 +21,7 @@
                 <th>Code</th>
                 <th>Price</th>
                 <th>Stock</th>
-                <th>Type</th>
+                <th>Product Category</th>
                 <th>Manufactured Date</th>
                 <th>Product Image</th>
                 <th>Actions</th>
@@ -29,11 +29,10 @@
         </thead>
         <tbody>
             @forelse($products as $product)
-                <livewire:products.record :product="$product" :key="$product->id">
+                <livewire:products.record :$product :key="$product->id">
             @empty
-                <tr><td colspan="6" class="text-center">No products found.</td></tr>
+                <tr><td colspan="6" class="text-center">No products available right now.</td></tr>
             @endforelse
-            {{ $products->links() }}
         </tbody>
     </table>
 </div>

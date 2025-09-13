@@ -17,7 +17,7 @@ class Edit extends Component
     public $code;
     public $unit_price;
     public $stock;
-    public $type;
+    public $category_id;
     public $description;
     public $mf_date;
     public $newPhoto;
@@ -32,7 +32,7 @@ class Edit extends Component
         $this->code = $this->product->code;
         $this->unit_price = $this->product->unit_price;
         $this->stock = $this->product->stock;
-        $this->type = $this->product->type;
+        $this->category_id = $this->product->category_id;
         $this->description = $this->product->description;
         $this->mf_date = $this->product->mf_date;
         // $this->photo = $this->product->photo;
@@ -45,7 +45,7 @@ class Edit extends Component
             'code' => 'required|string|max:20|unique:products,code,' . $this->product->id,
             'unit_price' => 'required|numeric',
             'stock' => 'required|integer',
-            'type' => 'required|string|max:50',
+            'category_id' => 'required|integer|max:50',
             'description' => 'required|string',
             'mf_date' => 'required|date|before_or_equal:today',
             'newPhoto' => 'nullable|image|max:1024',
