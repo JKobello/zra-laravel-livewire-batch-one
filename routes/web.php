@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
+use App\Http\Controllers\CategoryController;
 // use App\Http\Controllers\ProductController;
 use App\Livewire\Products\Index as ProductIndex;
 use App\Livewire\Products\Show as ProductShow;
@@ -29,6 +30,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/products/{product}/edit', ProductEdit::class)->name('products.edit');
     Route::get('/products/{product}/show', ProductShow::class)->name('products.show');
 });
+Route::resource('categories', CategoryController::class);
 
 
 // Route::get('/products', [ProductController::class, 'index'])->name('products.index');
