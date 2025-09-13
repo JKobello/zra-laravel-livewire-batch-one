@@ -25,18 +25,15 @@ class ProductFactory extends Factory
         FileHelper::createFolderIfNotExists($path);
 
         return [
-            'name'        => fake()->word(2, true),
+            'name'        => fake()->word(),
             'code'        => strtoupper(Str::random(6)),
-            'unit_price'  => fake()->randomFloat(),
             'type'        => fake()->randomElement(['Electronics', 'Furniture', 'Food', 'Clothing']),
             'description' => fake()->sentence(10),
             // 2 decimals, min 5, max 500
             'unit_price'  => fake()->randomFloat(2, 5, 500),
             'stock'       => fake()->numberBetween(1, 100),
             'mf_date'     => fake()->dateTimeBetween('-2 years', 'now')->format('Y-m-d'),
-            'photo' => function () use ($path) {
-                return 'attachments/products/img/' . fake()->image($path, 400, 300, null, false);
-            },
+            'photo' => fn () => 'attachments/products/img/' . fake()->image($path, 400, 300, null, false),
         ];
     }
 }
