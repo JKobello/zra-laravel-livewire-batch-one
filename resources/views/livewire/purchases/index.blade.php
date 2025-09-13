@@ -1,5 +1,4 @@
-<x-layouts.app :title="'Purchases'">
-
+<div>
     <h1>Purchases</h1>
 
     @if(session('success'))
@@ -29,7 +28,7 @@
         </thead>
         <tbody>
             @forelse($purchases as $purchase)
-                <tr>
+                <tr wire:key="{{ $purchase->id }}">
                     <!-- <td>{{ $purchase->supplier_id }}</td> -->
                     <td>{{ $purchase->invoice_number }}</td>
                     <td>{{ $purchase->purchase_order_number }}</td>
@@ -41,15 +40,15 @@
                     <td>{{ $purchase->tax }}</td>
                     <td>{{ $purchase->currency }}</td>
                     <td>
-                        <a href="{{ route('purchases.show', $purchase) }}" class="btn btn-info btn-sm">View</a>
-                        <a href="{{ route('purchases.edit', $purchase) }}" class="btn btn-warning btn-sm">Edit</a>
-                        <form action="{{ route('purchases.destroy', $purchase) }}" method="POST" class="d-inline">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" onclick="return confirm('Delete this purchase?')" class="btn btn-danger btn-sm">
-                                Delete
-                            </button>
-                        </form>
+                        <a href="{{ route('purchases.show', $purchase->id) }}" class="btn btn-info btn-sm">View</a>
+                        <a href="{{ route('purchases.edit', $purchase->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                        <button
+                            type="button"
+                            wire:click="destroy({{ $purchase->id }})"
+                            wire:confirm="Are you sure you want to delete this purchase?"
+                            >
+                            Delete
+                        </button>
                     </td>
                 </tr>
             @empty
@@ -57,4 +56,4 @@
             @endforelse
         </tbody>
     </table>
-</x-layouts.app>
+</div>

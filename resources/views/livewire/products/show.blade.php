@@ -1,4 +1,4 @@
-<x-layouts.app :title="'Products'">
+<div>
     <h1>{{ $product->name }}</h1>
     <ul class="list-group">
         <li class="list-group-item"><strong>Code:</strong> {{ $product->code }}</li>
@@ -9,4 +9,4 @@
     </ul>
 
     <a href="{{ route('products.index') }}" class="btn btn-primary mt-3">Back</a>
-</x-layouts.app>
+</div>
